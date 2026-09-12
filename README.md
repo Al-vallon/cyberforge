@@ -111,6 +111,12 @@ Ce lab est strictement local.
 
 Si vous voulez **jouer** la box, ne lisez pas `docs/solution.md` ni `boxes/box-001/flags/`.
 
+## Documentation projet
+
+Vision, état de l’art, MoSCoW, schémas d’architecture, planning et risques :
+
+- [docs/README.md](docs/README.md)
+
 ## Solution
 
 Le walkthrough est volontairement séparé du README public :
@@ -122,7 +128,10 @@ Le walkthrough est volontairement séparé du README public :
 ```text
 CyberForge/
 ├── README.md
-├── docs/solution.md
+├── docs/
+│   ├── README.md
+│   ├── projet/
+│   └── solution.md
 ├── boxes/box-001/
 └── scripts/
     ├── common.sh
