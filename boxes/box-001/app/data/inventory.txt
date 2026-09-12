@@ -1,0 +1,4 @@
+web-gateway.cyberforge.internal
+inventory-app.cyberforge.internal
+target.cyberforge.internal
+backup-01.cyberforge.internal

@@ -1,0 +1,43 @@
+services:
+  target:
+    build:
+      context: .
+      dockerfile: target/Dockerfile
+    image: localhost/cyberforge-box001-target:1.0
+    container_name: cyberforge-box001-target
+    hostname: target
+    restart: unless-stopped
+    networks:
+      - boxnet
+
+  app:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    image: localhost/cyberforge-box001-app:1.0
+    container_name: cyberforge-box001-app
+    hostname: app
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:5000:5000"
+    depends_on:
+      - target
+    networks:
+      - boxnet
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "python",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://127.0.0.1:5000/', timeout=3)",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+
+networks:
+  boxnet:
+    name: cyberforge_box001
+    driver: bridge

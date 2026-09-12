@@ -1,0 +1,51 @@
+name: CyberForge Box 001
+slug: box-001
+version: "1.0"
+difficulty: easy
+
+objectives:
+  - initial_access
+  - user_flag
+  - privilege_escalation
+  - root_flag
+
+cve: null
+
+lab:
+  isolation: local
+  bind: 127.0.0.1:5000
+  network: cyberforge_box001
+  web_vulnerability: intentional_command_injection
+  pivot: ssh_deploy_key_on_app
+  privilege_escalation: sudo_nopasswd_world_writable_script
+
+validation:
+  description: >
+    La box est fonctionnelle si les conteneurs tournent, le réseau dédié
+    existe, l'application répond uniquement via localhost, la cible est
+    joignable depuis le réseau interne, les flags sont en place avec les
+    bons privilèges, et la mauvaise configuration d'élévation est présente.
+  tests:
+    - id: containers_running
+      check: Les conteneurs app et target sont en cours d'exécution.
+    - id: network_exists
+      check: Le réseau cyberforge_box001 existe.
+    - id: web_reachable
+      check: HTTP http://127.0.0.1:5000/ répond et identifie CyberForge Box 001.
+    - id: bind_localhost
+      check: Le port HTTP est publié sur 127.0.0.1 uniquement.
+    - id: flags_not_in_http
+      check: Les flags ne sont pas exposés par l'application web.
+    - id: target_reachable_from_app
+      check: L'hôte target:22 est joignable depuis le conteneur app.
+    - id: user_flag_present
+      check: /home/cyber/user.txt existe, propriétaire cyber, mode 600.
+    - id: root_flag_present
+      check: /root/root.txt existe, propriétaire root, mode 600.
+    - id: privilege_escalation_configured
+      check: sudoers NOPASSWD et script system-health.sh world-writable.
+    - id: app_not_root
+      check: Le processus de l'application web ne tourne pas en root.
+    - id: objectives_declared
+      check: box.yml déclare les quatre objectifs du MVP.
+  command: ./boxes/box-001/validation/validate.sh
