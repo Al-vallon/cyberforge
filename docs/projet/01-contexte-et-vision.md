@@ -72,3 +72,4 @@ flowchart LR
 ## 7. Hypothèse de valeur
 
 Si le cycle *box → validation → reset* est fiable, alors un back-office (catalogue, scoring, plus tard CVE) peut s’ajouter **sans refondre** le modèle `boxes/<slug>/`.
+attente de validation de POC.
