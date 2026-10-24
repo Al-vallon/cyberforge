@@ -1,0 +1,40 @@
+name: Tâche
+description: Tâche planifiée, visible sur le Gantt du README
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Assignez un **milestone** GitHub dans la barre latérale : il devient une section du Gantt.
+
+        Les dates se lisent dans ce formulaire. Si la date de fin est vide, l’échéance du milestone est utilisée.
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Ce qu’il faut livrer.
+      placeholder: Décrire la tâche…
+    validations:
+      required: true
+  - type: input
+    id: start
+    attributes:
+      label: Date de début
+      description: Format YYYY-MM-DD.
+      placeholder: "2026-09-18"
+    validations:
+      required: false
+  - type: input
+    id: due
+    attributes:
+      label: Date de fin
+      description: Format YYYY-MM-DD. Si vide, la date du milestone est utilisée.
+      placeholder: "2026-10-06"
+    validations:
+      required: false
+  - type: checkboxes
+    id: exclude
+    attributes:
+      label: Gantt
+      options:
+        - label: Exclure cette issue du Gantt
